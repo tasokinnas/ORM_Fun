@@ -1,0 +1,100 @@
+# ORM Fun
+
+* Taso Kinnas
+
+
+## Overview
+
+Summary 
+ORMs, what is the difference between Entity Frameworks and Dapper?
+
+Details:
+1.	What are the pros/cons of both. (why would you choose one over the other).
+a.	Performance
+b.	Ease of setup 
+c.	Ease of use from a developer’s point of view. (small and large projects/systems)
+d.	Transactions 
+e.	Current trend is developing micro services (which one lends it’s self to that type of architecture)
+2.	What do the DTOs do verses a domain object.
+3.	Write an example of how both handle CRUD operations with a SQL server.
+
+https://dapper-tutorial.net/dapper
+https://docs.microsoft.com/en-us/ef/core/
+
+
+Sample project to define ORM and compare & contrast two ORM types: Entity Framework and Dapper
+
+
+## Compiling and Using
+
+This section should tell the user how to compile your code.  It is
+also appropriate to instruct the user how to use your code. Does your
+program require user input? If so, what does your user need to know
+about it to use it as quickly as possible?
+
+To compile, execute the following command in the main project directory:
+```
+$ javac Marshmallow.java
+```
+
+Run the compiled class with the command:
+```
+$ java Marshmallow
+```
+
+You will be prompted for integer values representing distance to the fire,
+fire intensity, marshmallow burn resistance, and marshmallow sugar density.
+
+## Discussion
+
+Discuss the issues you encountered during programming (development)
+and testing. What problems did you have? What did you have to
+research and learn on your own? What kinds of errors did you get? How
+did you fix them?
+
+What parts of the project did you find challenging? Is there anything
+that finally "clicked" for you in the process of working on this
+project?
+
+## Discussion
+
+When I realized my paintComponent() method was getting really long and hard to
+read, I broke out each graphical element into its own private method.  The hard
+part of that was figuring out that I needed to pass in the Graphics object to
+each method, but it worked well after I did that. It also helped to read about
+the Graphics class in the Java API, to learn how to use the different draw
+methods.
+
+I tested values from 0 to 20 for each of the input parameters, but I found that
+values greater than 20 cause the program to freeze up. I don't know how to
+restrict input values, yet, but that would be a good feature to add. I added
+a warning to the input dialog, but there's nothing to stop users from adding
+values over 20.
+
+I tried running the program remotely over SSH with X, but my connection wasn't
+fast enough to see the animation very well and there were several times the
+dialog boxes for my input prompts showed up behind the main window. When I
+came into the lab and ran it, however, everything looked good and worked just
+like it did when I ran it locally on my own computer.
+
+The starting file for the project had a window size of 200 x 500, but I found
+that the text was too small to read unless the height was at least 300, so I
+ended up with minimum dimensions of 300 x 500.  It looks best, though, even
+bigger.  I recommend 400 x 600.
+
+This project was challenging at first, but it was fun once I got the hang of
+it and I feel like I learned a lot about graphics in Java.
+
+
+## Sources used
+
+If you used any sources outside of the lecture notes, class lab files,
+or text book you need to list them here. If you looked something up on
+stackoverflow.com and fail to cite it in this section it will be
+considered plagiarism and be dealt with accordingly. So be safe CITE!
+[Here is some help creating links](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links)
+
+## Sources used
+
+- I found code for adding sound effects on stackoverflow.com.
+[Sound Effects in Java](http://stackoverflow.com/questions/20354508/sound-effects-in-java)
