@@ -1,8 +1,10 @@
 ﻿using Contracts;
 using LoggerService;
-
+using Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace ORM_Fun.Extensions
 {
@@ -31,6 +33,17 @@ namespace ORM_Fun.Extensions
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
+        }
+
+        public static void ConfigureDbContext(this IServiceCollection services, IConfiguration config)
+        {
+            var connectionString = config["dbconnection:connectionString"];
+            services.AddDbContext<RepositoryContext>(o => o.UseSqlServer(connectionString));
+        }
+
+        public static void ConfigureRepositoryWrapper(this IServiceCollection services)
+        {
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
 
     }
