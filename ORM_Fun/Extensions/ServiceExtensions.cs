@@ -1,10 +1,12 @@
-﻿using Contracts;
-using LoggerService;
+﻿using LoggerService;
+using Contracts;
 using Entities;
+using Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 
 namespace ORM_Fun.Extensions
 {

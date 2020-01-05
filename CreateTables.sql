@@ -47,18 +47,6 @@ CREATE TABLE dbo.Expectation  (
 
 
 
--- Create Expectation-Facet-Cohort Table
-CREATE TABLE dbo.Expectation_Facet_Cohort (
-	[Expectation_Id] UNIQUEIDENTIFIER NOT NULL,
-	[Facet_Id] UNIQUEIDENTIFIER NOT NULL,
-	[Cohort_Id] UNIQUEIDENTIFIER NOT NULL,
-	CONSTRAINT fk_Expectation_Facet_Cohort_Expectation FOREIGN KEY ([Expectation_Id]) REFERENCES Expectation ([Id]),
-	CONSTRAINT fk_Expectation_Facet_Cohort_Facet FOREIGN KEY ([Facet_Id]) REFERENCES Facet ([Id]),
-	CONSTRAINT fk_Expectation_Facet_Cohort_Cohort FOREIGN KEY ([Cohort_Id]) REFERENCES Cohort ([Id])
-);
-
-
-
 
 
 -- For CodeMaze Tutorial...

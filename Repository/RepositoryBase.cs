@@ -9,29 +9,37 @@ namespace Repository
 {
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
-        public void Create(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        protected RepositoryContext RepositoryContext { get; set; }
 
-        public void Delete(T entity)
+        public RepositoryBase(RepositoryContext repositoryContext)
         {
-            throw new NotImplementedException();
+            this.RepositoryContext = repositoryContext;
         }
 
         public IQueryable<T> FindAll()
         {
-            throw new NotImplementedException();
+            return RepositoryContext.Set<T>().AsNoTracking();
         }
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            throw new NotImplementedException();
+            return RepositoryContext.Set<T>().Where(expression).AsNoTracking();
+        }
+
+        public void Create(T entity)
+        {
+            RepositoryContext.Set<T>().Add(entity);
         }
 
         public void Update(T entity)
         {
-            throw new NotImplementedException();
+            RepositoryContext.Set<T>().Update(entity);
         }
+
+        public void Delete(T entity)
+        {
+            RepositoryContext.Set<T>().Remove(entity);
+        }
+
     }
 }
