@@ -1,14 +1,12 @@
+using ORM_Fun.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
 using System.IO;
-
-using ORM_Fun.Extensions;
-
+using AutoMapper;
 using NLog;
 
 namespace ORM_Fun
@@ -31,6 +29,8 @@ namespace ORM_Fun
             services.ConfigureLoggerService();
             services.ConfigureDbContext(Configuration);
             services.ConfigureRepositoryWrapper();
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddControllers();
         }
 
