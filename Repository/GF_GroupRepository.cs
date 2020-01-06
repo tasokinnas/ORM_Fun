@@ -1,6 +1,7 @@
 ﻿using Contracts;
 using Entities;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,16 @@ namespace Repository
 
         public GF_Group GetGF_GroupById(Guid Id)
         {
-            return FindByCondition(gf_group => gf_group.Id.Equals(Id)).FirstOrDefault();
+            return FindByCondition(g => g.Id.Equals(Id)).FirstOrDefault();
         }
+
+        public GF_Group GetGF_GroupWithDimensions(Guid Id)
+        {
+            var result = FindByCondition(g => g.Id.Equals(Id))
+                .Include(g => g.Dimensions)
+                .FirstOrDefault();
+            return result;
+        }
+
     }
 }

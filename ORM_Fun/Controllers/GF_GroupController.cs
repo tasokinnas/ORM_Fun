@@ -67,5 +67,32 @@ namespace ORM_Fun.Controllers
             }
         }
 
+        [HttpGet("{id}/dimension")]
+        public IActionResult GetF_GroupWithDimensions(Guid id)
+        {
+            try
+            {
+                var gf_group = _repository.GF_Group.GetGF_GroupById(id);
+                
+                if (gf_group == null)
+                {
+                    _logger.LogError($"GF Group with id: {id}, hasn't been found in db.");
+                    return NotFound();
+                }
+                else
+                {
+                    _logger.LogInfo($"Returned GF Group with id: {id}");
+
+                    var gf_groupResult = _mapper.Map<GF_GroupDTO>(gf_group);
+                    return Ok(gf_groupResult);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetF_GroupWithDimensions action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
     }
 }

@@ -8,6 +8,7 @@ namespace Entities.Models
     [Table("GF_Group")]
     public class GF_Group
     {
+
         [Required(ErrorMessage = "Id is required")]
         [StringLength(50, ErrorMessage = "Id can't be longer than 50 characters")]
         public Guid Id { get; set; }
