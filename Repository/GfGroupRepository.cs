@@ -8,29 +8,34 @@ using System.Linq;
 
 namespace Repository
 {
-    public class GF_GroupRepository : RepositoryBase<GF_Group>, IGF_GroupRepository
+    public class GfGroupRepository : RepositoryBase<GfGroup>, IGfGroupRepository
     {
-        public GF_GroupRepository(RepositoryContext repositoryContext) 
+        public GfGroupRepository(RepositoryContext repositoryContext) 
             : base(repositoryContext)
         {
         }
 
-        public IEnumerable<GF_Group> GetAllGF_Groups()
+        public IEnumerable<GfGroup> GetAllGfGroups()
         {
             return FindAll().OrderBy(g => g.Name).ToList();
         }
 
-        public GF_Group GetGF_GroupById(Guid Id)
+        public GfGroup GetGfGroupById(Guid Id)
         {
             return FindByCondition(g => g.Id.Equals(Id)).FirstOrDefault();
         }
 
-        public GF_Group GetGF_GroupWithDimensions(Guid Id)
+        public GfGroup GetGfGroupWithDimensions(Guid Id)
         {
             var result = FindByCondition(g => g.Id.Equals(Id))
                 .Include(g => g.Dimensions)
                 .FirstOrDefault();
             return result;
+        }
+
+        public void CreateGfGroup(GfGroup gfGroup)
+        {
+            Create(gfGroup);
         }
 
     }

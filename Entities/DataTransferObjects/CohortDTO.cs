@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Entities.DataTransferObjects
 {
-    public class CohortDTO
+    public class CohortDto
     {
         public Guid Id { get; set; }
 
         public string Name { get; set; }
 
-        public Guid Next_Cohort_Id { get; set; }
+        public int Rank { get; set; }
+
+        public Guid NextCohortId { get; set; }
+
+        public IEnumerable<ExpectationDto> Expectations { get; set; }
 
     }
 }

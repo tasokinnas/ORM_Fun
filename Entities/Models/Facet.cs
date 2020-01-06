@@ -17,7 +17,7 @@ namespace Entities.Models
         public string Name { get; set; }
 
         [ForeignKey(nameof(Dimension))]
-        public Guid Dimension_Id { get; set; }
+        public Guid DimensionId { get; set; }
         public Dimension Dimension { get; set; }
 
         public ICollection<Expectation> Expectations { get; set; }

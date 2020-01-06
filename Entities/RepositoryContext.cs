@@ -11,7 +11,7 @@ namespace Entities
         }
 
         public DbSet<Cohort> Cohorts { get; set; }
-        public DbSet<GF_Group> GF_Groups { get; set; }
+        public DbSet<GfGroup> GfGroups { get; set; }
         public DbSet<Dimension> Dimensions { get; set; }
         public DbSet<Facet> Facets { get; set; }
         public DbSet<Expectation> Expectations { get; set; }
@@ -20,9 +20,8 @@ namespace Entities
         {
             base.OnModelCreating(builder);
 
-            // Define composite key.
             builder.Entity<Expectation>()
-                .HasKey(lc => new { lc.Cohort_Id, lc.Facet_Id });
+                .HasKey(e => new { e.CohortId, e.FacetId });
         }
 
     }

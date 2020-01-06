@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Entities.DataTransferObjects
 {
-    public class DimensionDTO
+    public class DimensionDto
     {
         public Guid Id { get; set; }
 
         public string Name { get; set; }
 
-        public Guid GF_Group_Id { get; set; }
+        public Guid GfGroupId { get; set; }
+
+        public IEnumerable<FacetDto> Facets { get; set; }
     }
 }

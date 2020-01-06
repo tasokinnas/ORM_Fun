@@ -7,7 +7,7 @@ namespace Repository
     {
         private RepositoryContext _repoContext;
         private ICohortRepository _cohort;
-        private IGF_GroupRepository _gf_Group;
+        private IGfGroupRepository _gfGroup;
         private IDimensionRepository _dimension;
         private IFacetRepository _facet;
         private IExpectationRepository _expectation;
@@ -23,15 +23,15 @@ namespace Repository
             }
         }
 
-        public IGF_GroupRepository GF_Group
+        public IGfGroupRepository GfGroup
         {
             get
             {
-                if (_gf_Group == null)
+                if (_gfGroup == null)
                 {
-                    _gf_Group = new GF_GroupRepository(_repoContext);
+                    _gfGroup = new GfGroupRepository(_repoContext);
                 }
-                return _gf_Group;
+                return _gfGroup;
             }
         }
 

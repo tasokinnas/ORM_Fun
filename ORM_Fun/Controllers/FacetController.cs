@@ -30,7 +30,7 @@ namespace ORM_Fun.Controllers
                 var facets = _repository.Facet.GetAllFacets();
                 _logger.LogInfo($"Returned all facets from database.");
 
-                var facetResult = _mapper.Map<IEnumerable<FacetDTO>>(facets);
+                var facetResult = _mapper.Map<IEnumerable<FacetDto>>(facets);
 
                 return Ok(facetResult);
             }
@@ -56,7 +56,7 @@ namespace ORM_Fun.Controllers
                 {
                     _logger.LogInfo($"Returned facet with id: {id}");
 
-                    var facetResult = _mapper.Map<FacetDTO>(facet);
+                    var facetResult = _mapper.Map<FacetDto>(facet);
                     return Ok(facetResult);
                 }
             }

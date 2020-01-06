@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects;
 using Entities.Models;
-using System.Linq;
 
 namespace ORM_Fun
 {
@@ -9,20 +8,22 @@ namespace ORM_Fun
     {
         public MappingProfile()
         {
-            CreateMap<Cohort, CohortDTO>();
+            // Cohort
+            CreateMap<Cohort, CohortDto>();
 
-            CreateMap<GF_Group, GF_GroupDTO>();
-
-            CreateMap<Dimension, DimensionDTO>();
-
-            CreateMap<Facet, FacetDTO>();
-
-            CreateMap<Expectation, ExpectationDTO>();
+            //Group
+            CreateMap<GfGroup, GfGroupDto>();
+            CreateMap<GfGroupCreateDto, GfGroup>();
 
 
+            // Dimension
+            CreateMap<Dimension, DimensionDto>();
 
+            //Facet
+            CreateMap<Facet, FacetDto>();
 
-
+            //Expectation
+            CreateMap<Expectation, ExpectationDto>();
         }
     }
 }

@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
-    [Table("GF_Group")]
-    public class GF_Group
+    [Table("GfGroup")]
+    public class GfGroup
     {
 
         [Required(ErrorMessage = "Id is required")]

@@ -17,7 +17,7 @@ namespace Entities.Models
         public string Name { get; set; }
 
         [ForeignKey(nameof(Cohort))]
-        public Guid Next_Cohort_Id { get; set; }
+        public Guid NextCohortId { get; set; }
 
         public ICollection<Expectation> Expectations { get; set; }
     }

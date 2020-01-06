@@ -13,12 +13,12 @@ namespace Entities.Models
 
         [Required(ErrorMessage = "Cohort Id is required")]
         [ForeignKey(nameof(Cohort))]
-        public Guid Cohort_Id { get; set; }
+        public Guid CohortId { get; set; }
         public Cohort Cohort { get; set; }
 
         [Required(ErrorMessage = "Facet Id is required")]
         [ForeignKey(nameof(Facet))]
-        public Guid Facet_Id { get; set; }
+        public Guid FacetId { get; set; }
         public Facet Facet { get; set; }
 
     }

@@ -30,7 +30,7 @@ namespace ORM_Fun.Controllers
                 var dimensions = _repository.Dimension.GetAllDimensions();
                 _logger.LogInfo($"Returned all dimensions from database.");
 
-                var dimensionResult = _mapper.Map<IEnumerable<DimensionDTO>>(dimensions);
+                var dimensionResult = _mapper.Map<IEnumerable<DimensionDto>>(dimensions);
 
                 return Ok(dimensionResult);
             }
@@ -56,7 +56,7 @@ namespace ORM_Fun.Controllers
                 {
                     _logger.LogInfo($"Returned dimension with id: {id}");
 
-                    var dimensionResult = _mapper.Map<DimensionDTO>(dimension);
+                    var dimensionResult = _mapper.Map<DimensionDto>(dimension);
                     return Ok(dimensionResult);
                 }
             }

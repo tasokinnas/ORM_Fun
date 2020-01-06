@@ -1,13 +1,14 @@
 ﻿using System;
 
+
 namespace Entities.DataTransferObjects
 {
-    public class ExpectationDTO
+    public class ExpectationDto
     {
         public string Description { get; set; }
 
-        public Guid Cohort_Id { get; set; }
+        public Guid CohortId { get; set; }
 
-        public Guid Facet_Id { get; set; }
+        public Guid FacetId { get; set; }
     }
 }

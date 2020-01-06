@@ -30,7 +30,7 @@ namespace ORM_Fun.Controllers
                 var cohorts = _repository.Cohort.GetAllCohorts();
                 _logger.LogInfo($"Returned all cohorts from database.");
 
-                var cohortResult = _mapper.Map<IEnumerable<CohortDTO>>(cohorts);
+                var cohortResult = _mapper.Map<IEnumerable<CohortDto>>(cohorts);
 
                 return Ok(cohortResult);
             }
@@ -56,7 +56,7 @@ namespace ORM_Fun.Controllers
                 {
                     _logger.LogInfo($"Returned cohort with id: {id}");
 
-                    var cohortResult = _mapper.Map<CohortDTO>(cohort);
+                    var cohortResult = _mapper.Map<CohortDto>(cohort);
                     return Ok(cohortResult);
                 }
             }

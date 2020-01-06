@@ -30,7 +30,7 @@ namespace ORM_Fun.Controllers
                 var expectations = _repository.Expectation.GetAllExpectations();
                 _logger.LogInfo($"Returned all expectations from database.");
 
-                var expectationResult = _mapper.Map<IEnumerable<ExpectationDTO>>(expectations);
+                var expectationResult = _mapper.Map<IEnumerable<ExpectationDto>>(expectations);
 
                 return Ok(expectationResult);
             }
@@ -42,21 +42,21 @@ namespace ORM_Fun.Controllers
         }
 
         [HttpGet("{cohort_id}/{facet_id}")]
-        public IActionResult GetExpectationById(Guid cohort_id, Guid facet_id)
+        public IActionResult GetExpectationById(Guid cohortId, Guid facetId)
         {
             try
             {
-                var expectation = _repository.Expectation.GetExpectationById(cohort_id, facet_id);
+                var expectation = _repository.Expectation.GetExpectationById(cohortId, facetId);
                 if (expectation == null)
                 {
-                    _logger.LogError($"Expectation with id: {cohort_id} and {facet_id}, hasn't been found in db.");
+                    _logger.LogError($"Expectation with id: {cohortId} and {facetId}, hasn't been found in db.");
                     return NotFound();
                 }
                 else
                 {
-                    _logger.LogInfo($"Returned expectation with ids: {cohort_id}, {facet_id}");
+                    _logger.LogInfo($"Returned expectation with ids: {cohortId}, {facetId}");
 
-                    var expectationResult = _mapper.Map<ExpectationDTO>(expectation);
+                    var expectationResult = _mapper.Map<ExpectationDto>(expectation);
                     return Ok(expectationResult);
                 }
             }
