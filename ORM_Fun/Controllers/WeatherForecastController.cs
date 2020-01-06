@@ -8,57 +8,34 @@ using Microsoft.Extensions.Logging;
 
 namespace ORM_Fun.Controllers
 {
+    [Route("forecast")]
     [ApiController]
-    [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private IRepositoryWrapper _repository;
-
-        public WeatherForecastController(IRepositoryWrapper repository)
+        private static readonly string[] Summaries = new[]
         {
-            _repository = repository;
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
+
+        private readonly ILogger<WeatherForecastController> _logger;
+
+        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        {
+            _logger = logger;
         }
-        
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<WeatherForecast> Get()
         {
-            var cohorts = _repository.Cohort.FindAll();
-            var gfGroups = _repository.GF_Group.FindAll();
-            var dimensions = _repository.Dimension.FindAll();
-            var facets = _repository.Facet.FindAll();
-            var expectations = _repository.Expectation.FindAll();
-
-            return new string[] { "value1", "value2" };
-            // return cohorts;
+            var rng = new Random();
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = Summaries[rng.Next(Summaries.Length)]
+            })
+            .ToArray();
         }
-        
-        
-        
-        //private static readonly string[] Summaries = new[]
-        //{
-        //    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        //};
-
-        //private readonly ILogger<WeatherForecastController> _logger;
-
-        //public WeatherForecastController(ILogger<WeatherForecastController> logger)
-        //{
-        //    _logger = logger;
-        //}
-
-        //[HttpGet]
-        //public IEnumerable<WeatherForecast> Get()
-        //{
-        //    var rng = new Random();
-        //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        //    {
-        //        Date = DateTime.Now.AddDays(index),
-        //        TemperatureC = rng.Next(-20, 55),
-        //        Summary = Summaries[rng.Next(Summaries.Length)]
-        //    })
-        //    .ToArray();
-        //}
-
 
     }
 }

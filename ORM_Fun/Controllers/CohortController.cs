@@ -7,7 +7,7 @@ using AutoMapper;
 
 namespace ORM_Fun.Controllers
 {
-    [Route("api/cohort")]
+    [Route("cohort")]
     [ApiController]
     public class CohortController : ControllerBase
     {
@@ -30,9 +30,9 @@ namespace ORM_Fun.Controllers
                 var cohorts = _repository.Cohort.GetAllCohorts();
                 _logger.LogInfo($"Returned all cohorts from database.");
 
-                var cohortREsult = _mapper.Map<IEnumerable<CohortDTO>>(cohorts);
+                var cohortResult = _mapper.Map<IEnumerable<CohortDTO>>(cohorts);
 
-                return Ok(cohorts);
+                return Ok(cohortResult);
             }
             catch (Exception ex)
             {

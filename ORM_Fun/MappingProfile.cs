@@ -10,6 +10,16 @@ namespace ORM_Fun
         public MappingProfile()
         {
             CreateMap<Cohort, CohortDTO>();
+
+            CreateMap<GF_Group, GF_GroupDTO>();
+
+            CreateMap<Dimension, DimensionDTO>();
+
+            CreateMap<Facet, FacetDTO>();
+
+            CreateMap<Expectation, ExpectationDTO>();
+
+
         }
     }
 }

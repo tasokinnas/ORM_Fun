@@ -16,6 +16,14 @@ namespace Entities
         public DbSet<Facet> Facets { get; set; }
         public DbSet<Expectation> Expectations { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            // Define composite key.
+            builder.Entity<Expectation>()
+                .HasKey(lc => new { lc.Cohort_Id, lc.Facet_Id });
+        }
 
     }
 }
