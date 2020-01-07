@@ -15,15 +15,15 @@ namespace ORM_Fun.Controllers
     [ApiController]
     public class ExpectationController : ControllerBase
     {
-        private ILoggerManager _logger;
-        private IRepositoryWrapper _repository;
-        private IMapper _mapper;
+        private ILoggerManager logger;
+        private IRepositoryWrapper repository;
+        private IMapper mapper;
 
         public ExpectationController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
         {
-            this._logger = logger;
-            this._repository = repository;
-            this._mapper = mapper;
+            this.logger = logger;
+            this.repository = repository;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -31,16 +31,16 @@ namespace ORM_Fun.Controllers
         {
             try
             {
-                var expectations = this._repository.Expectation.GetAllExpectations();
-                this._logger.LogInfo($"Returned all expectations from database.");
+                var expectations = this.repository.Expectation.GetAllExpectations();
+                this.logger.LogInfo($"Returned all expectations from database.");
 
-                var expectationResult = this._mapper.Map<IEnumerable<ExpectationDto>>(expectations);
+                var expectationResult = this.mapper.Map<IEnumerable<ExpectationDto>>(expectations);
 
                 return this.Ok(expectationResult);
             }
             catch (Exception ex)
             {
-                this._logger.LogError($"Something went wrong inside GetAllExpectations action: {ex.Message}");
+                this.logger.LogError($"Something went wrong inside GetAllExpectations action: {ex.Message}");
                 return this.StatusCode(500, "Internal server error");
             }
         }
@@ -50,23 +50,23 @@ namespace ORM_Fun.Controllers
         {
             try
             {
-                var expectation = this._repository.Expectation.GetExpectationById(cohortId, facetId);
+                var expectation = this.repository.Expectation.GetExpectationById(cohortId, facetId);
                 if (expectation == null)
                 {
-                    this._logger.LogError($"Expectation with id: {cohortId} and {facetId}, hasn't been found in db.");
+                    this.logger.LogError($"Expectation with id: {cohortId} and {facetId}, hasn't been found in db.");
                     return this.NotFound();
                 }
                 else
                 {
-                    this._logger.LogInfo($"Returned expectation with ids: {cohortId}, {facetId}");
+                    this.logger.LogInfo($"Returned expectation with ids: {cohortId}, {facetId}");
 
-                    var expectationResult = this._mapper.Map<ExpectationDto>(expectation);
+                    var expectationResult = this.mapper.Map<ExpectationDto>(expectation);
                     return this.Ok(expectationResult);
                 }
             }
             catch (Exception ex)
             {
-                this._logger.LogError($"Something went wrong inside GetExpectationByIds action: {ex.Message}");
+                this.logger.LogError($"Something went wrong inside GetExpectationByIds action: {ex.Message}");
                 return this.StatusCode(500, "Internal server error");
             }
         }

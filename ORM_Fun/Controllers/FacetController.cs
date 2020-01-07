@@ -15,15 +15,15 @@ namespace ORM_Fun.Controllers
     [ApiController]
     public class FacetController : ControllerBase
     {
-        private ILoggerManager _logger;
-        private IRepositoryWrapper _repository;
-        private IMapper _mapper;
+        private ILoggerManager logger;
+        private IRepositoryWrapper repository;
+        private IMapper mapper;
 
         public FacetController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
         {
-            this._logger = logger;
-            this._repository = repository;
-            this._mapper = mapper;
+            this.logger = logger;
+            this.repository = repository;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -31,16 +31,16 @@ namespace ORM_Fun.Controllers
         {
             try
             {
-                var facets = this._repository.Facet.GetAllFacets();
-                this._logger.LogInfo($"Returned all facets from database.");
+                var facets = this.repository.Facet.GetAllFacets();
+                this.logger.LogInfo($"Returned all facets from database.");
 
-                var facetResult = this._mapper.Map<IEnumerable<FacetDto>>(facets);
+                var facetResult = this.mapper.Map<IEnumerable<FacetDto>>(facets);
 
                 return this.Ok(facetResult);
             }
             catch (Exception ex)
             {
-                this._logger.LogError($"Something went wrong inside GetAllFacets action: {ex.Message}");
+                this.logger.LogError($"Something went wrong inside GetAllFacets action: {ex.Message}");
                 return this.StatusCode(500, "Internal server error");
             }
         }
@@ -50,23 +50,23 @@ namespace ORM_Fun.Controllers
         {
             try
             {
-                var facet = this._repository.Facet.GetFacetById(id);
+                var facet = this.repository.Facet.GetFacetById(id);
                 if (facet == null)
                 {
-                    this._logger.LogError($"Facet with id: {id}, hasn't been found in db.");
+                    this.logger.LogError($"Facet with id: {id}, hasn't been found in db.");
                     return this.NotFound();
                 }
                 else
                 {
-                    this._logger.LogInfo($"Returned facet with id: {id}");
+                    this.logger.LogInfo($"Returned facet with id: {id}");
 
-                    var facetResult = this._mapper.Map<FacetDto>(facet);
+                    var facetResult = this.mapper.Map<FacetDto>(facet);
                     return this.Ok(facetResult);
                 }
             }
             catch (Exception ex)
             {
-                this._logger.LogError($"Something went wrong inside GetFacetById action: {ex.Message}");
+                this.logger.LogError($"Something went wrong inside GetFacetById action: {ex.Message}");
                 return this.StatusCode(500, "Internal server error");
             }
         }

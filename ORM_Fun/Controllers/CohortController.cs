@@ -15,15 +15,15 @@ namespace ORM_Fun.Controllers
     [ApiController]
     public class CohortController : ControllerBase
     {
-        private ILoggerManager _logger;
-        private IRepositoryWrapper _repository;
-        private IMapper _mapper;
+        private ILoggerManager logger;
+        private IRepositoryWrapper repository;
+        private IMapper mapper;
 
         public CohortController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
         {
-            this._logger = logger;
-            this._repository = repository;
-            this._mapper = mapper;
+            this.logger = logger;
+            this.repository = repository;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -31,16 +31,16 @@ namespace ORM_Fun.Controllers
         {
             try
             {
-                var cohorts = this._repository.Cohort.GetAllCohorts();
-                this._logger.LogInfo($"Returned all cohorts from database.");
+                var cohorts = this.repository.Cohort.GetAllCohorts();
+                this.logger.LogInfo($"Returned all cohorts from database.");
 
-                var cohortResult = this._mapper.Map<IEnumerable<CohortDto>>(cohorts);
+                var cohortResult = this.mapper.Map<IEnumerable<CohortDto>>(cohorts);
 
                 return this.Ok(cohortResult);
             }
             catch (Exception ex)
             {
-                this._logger.LogError($"Something went wrong inside GetAllCohorts action: {ex.Message}");
+                this.logger.LogError($"Something went wrong inside GetAllCohorts action: {ex.Message}");
                 return this.StatusCode(500, "Internal server error");
             }
         }
@@ -50,23 +50,23 @@ namespace ORM_Fun.Controllers
         {
             try
             {
-                var cohort = this._repository.Cohort.GetCohortById(id);
+                var cohort = this.repository.Cohort.GetCohortById(id);
                 if (cohort == null)
                 {
-                    this._logger.LogError($"Cohrt with id: {id}, hasn't been found in db.");
+                    this.logger.LogError($"Cohrt with id: {id}, hasn't been found in db.");
                     return this.NotFound();
                 }
                 else
                 {
-                    this._logger.LogInfo($"Returned cohort with id: {id}");
+                    this.logger.LogInfo($"Returned cohort with id: {id}");
 
-                    var cohortResult = this._mapper.Map<CohortDto>(cohort);
+                    var cohortResult = this.mapper.Map<CohortDto>(cohort);
                     return this.Ok(cohortResult);
                 }
             }
             catch (Exception ex)
             {
-                this._logger.LogError($"Something went wrong inside GetOwnerById action: {ex.Message}");
+                this.logger.LogError($"Something went wrong inside GetOwnerById action: {ex.Message}");
                 return this.StatusCode(500, "Internal server error");
             }
         }

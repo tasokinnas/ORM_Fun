@@ -1,5 +1,5 @@
-﻿// <copyright file="CohortDto.cs" company="Allata, LLC">
-// Copyright (c) Allata, LLC. All rights reserved.
+﻿// <copyright file="CohortDto.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
 namespace Entities.DataTransferObjects

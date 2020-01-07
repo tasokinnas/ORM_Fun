@@ -9,23 +9,28 @@ namespace Repository
 
     public class RepositoryWrapper : IRepositoryWrapper
     {
-        private RepositoryContext _repoContext;
-        private ICohortRepository _cohort;
-        private IGfGroupRepository _gfGroup;
-        private IDimensionRepository _dimension;
-        private IFacetRepository _facet;
-        private IExpectationRepository _expectation;
+        private RepositoryContext repoContext;
+        private ICohortRepository cohort;
+        private IGfGroupRepository gfGroup;
+        private IDimensionRepository dimension;
+        private IFacetRepository facet;
+        private IExpectationRepository expectation;
+
+        public RepositoryWrapper(RepositoryContext repositoryContext)
+        {
+            this.repoContext = repositoryContext;
+        }
 
         public ICohortRepository Cohort
         {
             get
             {
-                if (this._cohort == null)
+                if (this.cohort == null)
                 {
-                    this._cohort = new CohortRepository(this._repoContext);
+                    this.cohort = new CohortRepository(this.repoContext);
                 }
 
-                return this._cohort;
+                return this.cohort;
             }
         }
 
@@ -33,12 +38,12 @@ namespace Repository
         {
             get
             {
-                if (this._gfGroup == null)
+                if (this.gfGroup == null)
                 {
-                    this._gfGroup = new GfGroupRepository(this._repoContext);
+                    this.gfGroup = new GfGroupRepository(this.repoContext);
                 }
 
-                return this._gfGroup;
+                return this.gfGroup;
             }
         }
 
@@ -46,12 +51,12 @@ namespace Repository
         {
             get
             {
-                if (this._dimension == null)
+                if (this.dimension == null)
                 {
-                    this._dimension = new DimensionRepository(this._repoContext);
+                    this.dimension = new DimensionRepository(this.repoContext);
                 }
 
-                return this._dimension;
+                return this.dimension;
             }
         }
 
@@ -59,12 +64,12 @@ namespace Repository
         {
             get
             {
-                if (this._facet == null)
+                if (this.facet == null)
                 {
-                    this._facet = new FacetRepository(this._repoContext);
+                    this.facet = new FacetRepository(this.repoContext);
                 }
 
-                return this._facet;
+                return this.facet;
             }
         }
 
@@ -72,23 +77,18 @@ namespace Repository
         {
             get
             {
-                if (this._expectation == null)
+                if (this.expectation == null)
                 {
-                    this._expectation = new ExpectationRepository(this._repoContext);
+                    this.expectation = new ExpectationRepository(this.repoContext);
                 }
 
-                return this._expectation;
+                return this.expectation;
             }
-        }
-
-        public RepositoryWrapper(RepositoryContext repositoryContext)
-        {
-            this._repoContext = repositoryContext;
         }
 
         public void Save()
         {
-            this._repoContext.SaveChanges();
+            this.repoContext.SaveChanges();
         }
     }
 }

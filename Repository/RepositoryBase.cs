@@ -11,14 +11,11 @@ namespace Repository
     using Entities;
     using Microsoft.EntityFrameworkCore;
 
-    public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
+    public abstract class RepositoryBase<T> : IRepositoryBase<T>
+        where T : class
     {
         protected RepositoryContext RepositoryContext { get; set; }
 
-        /// <summary>
-        /// Repository base context.
-        /// </summary>
-        /// <param name="repositoryContext"></param>
         public RepositoryBase(RepositoryContext repositoryContext)
         {
             this.RepositoryContext = repositoryContext;

@@ -24,14 +24,14 @@ namespace Repository
             return this.FindAll().OrderBy(g => g.Name).ToList();
         }
 
-        public GfGroup GetGfGroupById(Guid Id)
+        public GfGroup GetGfGroupById(Guid id)
         {
-            return this.FindByCondition(g => g.Id.Equals(Id)).FirstOrDefault();
+            return this.FindByCondition(g => g.Id.Equals(id)).FirstOrDefault();
         }
 
-        public GfGroup GetGfGroupWithDimensions(Guid Id)
+        public GfGroup GetGfGroupWithDimensions(Guid id)
         {
-            var result = this.FindByCondition(g => g.Id.Equals(Id))
+            var result = this.FindByCondition(g => g.Id.Equals(id))
                 .Include(g => g.Dimensions)
                 .FirstOrDefault();
             return result;

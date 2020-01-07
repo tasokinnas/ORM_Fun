@@ -1,5 +1,5 @@
-﻿// <copyright file="ICohortRepository.cs" company="Allata, LLC">
-// Copyright (c) Allata, LLC. All rights reserved.
+﻿// <copyright file="ICohortRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
 namespace Contracts
@@ -24,12 +24,12 @@ namespace Contracts
         /// <summary>
         /// Get Cohort by id.
         /// </summary>
-        /// <param name="Id">
+        /// <param name="id">
         /// The id of a cohort.
         /// </param>
         /// <returns>
         /// Returns cohort detail for a given id.
         /// </returns>
-        Cohort GetCohortById(Guid Id);
+        Cohort GetCohortById(Guid id);
     }
 }

@@ -12,21 +12,16 @@ namespace ORM_Fun
     {
         public MappingProfile()
         {
-            // Cohort
             this.CreateMap<Cohort, CohortDto>();
 
-            //Group
             this.CreateMap<GfGroup, GfGroupDto>();
             this.CreateMap<GfGroupCreateDto, GfGroup>();
             this.CreateMap<GfGroupUpdateDto, GfGroup>();
 
-            // Dimension
             this.CreateMap<Dimension, DimensionDto>();
 
-            //Facet
             this.CreateMap<Facet, FacetDto>();
 
-            //Expectation
             this.CreateMap<Expectation, ExpectationDto>();
         }
     }
