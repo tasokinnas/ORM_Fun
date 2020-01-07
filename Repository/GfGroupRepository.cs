@@ -1,33 +1,37 @@
-﻿using Contracts;
-using Entities;
-using Entities.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// <copyright file="GfGroupRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Repository
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Contracts;
+    using Entities;
+    using Entities.Models;
+    using Microsoft.EntityFrameworkCore;
+
     public class GfGroupRepository : RepositoryBase<GfGroup>, IGfGroupRepository
     {
-        public GfGroupRepository(RepositoryContext repositoryContext) 
+        public GfGroupRepository(RepositoryContext repositoryContext)
             : base(repositoryContext)
         {
         }
 
         public IEnumerable<GfGroup> GetAllGfGroups()
         {
-            return FindAll().OrderBy(g => g.Name).ToList();
+            return this.FindAll().OrderBy(g => g.Name).ToList();
         }
 
         public GfGroup GetGfGroupById(Guid Id)
         {
-            return FindByCondition(g => g.Id.Equals(Id)).FirstOrDefault();
+            return this.FindByCondition(g => g.Id.Equals(Id)).FirstOrDefault();
         }
 
         public GfGroup GetGfGroupWithDimensions(Guid Id)
         {
-            var result = FindByCondition(g => g.Id.Equals(Id))
+            var result = this.FindByCondition(g => g.Id.Equals(Id))
                 .Include(g => g.Dimensions)
                 .FirstOrDefault();
             return result;
@@ -35,14 +39,12 @@ namespace Repository
 
         public void CreateGfGroup(GfGroup gfGroup)
         {
-            Create(gfGroup);
+            this.Create(gfGroup);
         }
 
-        public void UpdateGfGroup(GfGroup gfGroup) 
+        public void UpdateGfGroup(GfGroup gfGroup)
         {
-            Update(gfGroup);
+            this.Update(gfGroup);
         }
-
-
     }
 }

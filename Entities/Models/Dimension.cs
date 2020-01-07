@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿// <copyright file="Dimension.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Entities.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     [Table("Dimension")]
     public class Dimension
     {
@@ -18,6 +22,7 @@ namespace Entities.Models
 
         [ForeignKey(nameof(GfGroup))]
         public Guid GfGroupId { get; set; }
+
         public GfGroup GfGroup { get; set; }
 
         public ICollection<Facet> Facets { get; set; }

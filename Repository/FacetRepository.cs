@@ -1,12 +1,16 @@
-﻿using Contracts;
-using Entities;
-using Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// <copyright file="FacetRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Repository
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Contracts;
+    using Entities;
+    using Entities.Models;
+
     public class FacetRepository : RepositoryBase<Facet>, IFacetRepository
     {
         public FacetRepository(RepositoryContext repositoryContext)
@@ -16,12 +20,12 @@ namespace Repository
 
         public IEnumerable<Facet> GetAllFacets()
         {
-            return FindAll().OrderBy(f => f.Name).ToList();
+            return this.FindAll().OrderBy(f => f.Name).ToList();
         }
 
         public Facet GetFacetById(Guid id)
         {
-            return FindByCondition(facet => facet.Id.Equals(id)).FirstOrDefault();
+            return this.FindByCondition(facet => facet.Id.Equals(id)).FirstOrDefault();
         }
     }
 }

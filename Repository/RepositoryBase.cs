@@ -1,16 +1,24 @@
-﻿using Contracts;
-using Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿// <copyright file="RepositoryBase.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Repository
 {
+    using System;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using Contracts;
+    using Entities;
+    using Microsoft.EntityFrameworkCore;
+
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
         protected RepositoryContext RepositoryContext { get; set; }
 
+        /// <summary>
+        /// Repository base context.
+        /// </summary>
+        /// <param name="repositoryContext"></param>
         public RepositoryBase(RepositoryContext repositoryContext)
         {
             this.RepositoryContext = repositoryContext;
@@ -18,28 +26,27 @@ namespace Repository
 
         public IQueryable<T> FindAll()
         {
-            return RepositoryContext.Set<T>().AsNoTracking();
+            return this.RepositoryContext.Set<T>().AsNoTracking();
         }
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            return RepositoryContext.Set<T>().Where(expression).AsNoTracking();
+            return this.RepositoryContext.Set<T>().Where(expression).AsNoTracking();
         }
 
         public void Create(T entity)
         {
-            RepositoryContext.Set<T>().Add(entity);
+            this.RepositoryContext.Set<T>().Add(entity);
         }
 
         public void Update(T entity)
         {
-            RepositoryContext.Set<T>().Update(entity);
+            this.RepositoryContext.Set<T>().Update(entity);
         }
 
         public void Delete(T entity)
         {
-            RepositoryContext.Set<T>().Remove(entity);
+            this.RepositoryContext.Set<T>().Remove(entity);
         }
-
     }
 }

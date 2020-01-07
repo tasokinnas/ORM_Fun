@@ -1,8 +1,12 @@
-﻿using Contracts;
-using Entities;
+﻿// <copyright file="RepositoryWrapper.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Repository
 {
+    using Contracts;
+    using Entities;
+
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private RepositoryContext _repoContext;
@@ -14,12 +18,14 @@ namespace Repository
 
         public ICohortRepository Cohort
         {
-            get { 
-                if(_cohort == null)
+            get
+            {
+                if (this._cohort == null)
                 {
-                    _cohort = new CohortRepository(_repoContext);
+                    this._cohort = new CohortRepository(this._repoContext);
                 }
-                return _cohort;
+
+                return this._cohort;
             }
         }
 
@@ -27,11 +33,12 @@ namespace Repository
         {
             get
             {
-                if (_gfGroup == null)
+                if (this._gfGroup == null)
                 {
-                    _gfGroup = new GfGroupRepository(_repoContext);
+                    this._gfGroup = new GfGroupRepository(this._repoContext);
                 }
-                return _gfGroup;
+
+                return this._gfGroup;
             }
         }
 
@@ -39,11 +46,12 @@ namespace Repository
         {
             get
             {
-                if (_dimension == null)
+                if (this._dimension == null)
                 {
-                    _dimension = new DimensionRepository(_repoContext);
+                    this._dimension = new DimensionRepository(this._repoContext);
                 }
-                return _dimension;
+
+                return this._dimension;
             }
         }
 
@@ -51,11 +59,12 @@ namespace Repository
         {
             get
             {
-                if (_facet == null)
+                if (this._facet == null)
                 {
-                    _facet = new FacetRepository(_repoContext);
+                    this._facet = new FacetRepository(this._repoContext);
                 }
-                return _facet;
+
+                return this._facet;
             }
         }
 
@@ -63,22 +72,23 @@ namespace Repository
         {
             get
             {
-                if (_expectation == null)
+                if (this._expectation == null)
                 {
-                    _expectation = new ExpectationRepository(_repoContext);
+                    this._expectation = new ExpectationRepository(this._repoContext);
                 }
-                return _expectation;
+
+                return this._expectation;
             }
         }
 
         public RepositoryWrapper(RepositoryContext repositoryContext)
         {
-            _repoContext = repositoryContext;
+            this._repoContext = repositoryContext;
         }
 
         public void Save()
         {
-            _repoContext.SaveChanges();
+            this._repoContext.SaveChanges();
         }
     }
 }

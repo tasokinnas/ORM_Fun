@@ -1,12 +1,16 @@
-﻿using Contracts;
-using Entities;
-using Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// <copyright file="DimensionRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Repository
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Contracts;
+    using Entities;
+    using Entities.Models;
+
     public class DimensionRepository : RepositoryBase<Dimension>, IDimensionRepository
     {
         public DimensionRepository(RepositoryContext repositoryContext)
@@ -16,12 +20,12 @@ namespace Repository
 
         public IEnumerable<Dimension> GetAllDimensions()
         {
-            return FindAll().OrderBy(d => d.Name).ToList();
+            return this.FindAll().OrderBy(d => d.Name).ToList();
         }
 
         public Dimension GetDimensionById(Guid id)
         {
-            return FindByCondition(dimension => dimension.Id.Equals(id)).FirstOrDefault();
+            return this.FindByCondition(dimension => dimension.Id.Equals(id)).FirstOrDefault();
         }
     }
 }

@@ -1,8 +1,12 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿// <copyright file="GfGroupUpdateDto.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Entities.DataTransferObjects
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     public class GfGroupUpdateDto
     {
         [Required(ErrorMessage = "Id is required")]

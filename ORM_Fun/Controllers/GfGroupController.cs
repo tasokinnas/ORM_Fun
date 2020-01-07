@@ -1,13 +1,17 @@
-﻿using Contracts;
-using Entities.DataTransferObjects;
-using Entities.Models;
-using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
+﻿// <copyright file="GfGroupController.cs" company="Allata, LLC">
+// Copyright (c) Allata, LLC. All rights reserved.
+// </copyright>
 
 namespace ORM_Fun.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using AutoMapper;
+    using Contracts;
+    using Entities.DataTransferObjects;
+    using Entities.Models;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("gfgroup")]
     [ApiController]
     public class GfGroupController : ControllerBase
@@ -18,9 +22,9 @@ namespace ORM_Fun.Controllers
 
         public GfGroupController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
         {
-            _logger = logger;
-            _repository = repository;
-            _mapper = mapper;
+            this._logger = logger;
+            this._repository = repository;
+            this._mapper = mapper;
         }
 
         [HttpGet]
@@ -28,17 +32,17 @@ namespace ORM_Fun.Controllers
         {
             try
             {
-                var gfGroups = _repository.GfGroup.GetAllGfGroups();
-                _logger.LogInfo($"Returned all GF Groups from database.");
+                var gfGroups = this._repository.GfGroup.GetAllGfGroups();
+                this._logger.LogInfo($"Returned all GF Groups from database.");
 
-                var gfGroupResult = _mapper.Map<IEnumerable<GfGroupDto>>(gfGroups);
+                var gfGroupResult = this._mapper.Map<IEnumerable<GfGroupDto>>(gfGroups);
 
-                return Ok(gfGroupResult);
+                return this.Ok(gfGroupResult);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside GetAllGfGroups action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                this._logger.LogError($"Something went wrong inside GetAllGfGroups action: {ex.Message}");
+                return this.StatusCode(500, "Internal server error");
             }
         }
 
@@ -47,24 +51,24 @@ namespace ORM_Fun.Controllers
         {
             try
             {
-                var gfGroup = _repository.GfGroup.GetGfGroupById(id);
+                var gfGroup = this._repository.GfGroup.GetGfGroupById(id);
                 if (gfGroup == null)
                 {
-                    _logger.LogError($"GF Group with id: {id}, hasn't been found in db.");
-                    return NotFound();
+                    this._logger.LogError($"GF Group with id: {id}, hasn't been found in db.");
+                    return this.NotFound();
                 }
                 else
                 {
-                    _logger.LogInfo($"Returned GF Group with id: {id}");
+                    this._logger.LogInfo($"Returned GF Group with id: {id}");
 
-                    var gfGroupResult = _mapper.Map<GfGroupDto>(gfGroup);
-                    return Ok(gfGroupResult);
+                    var gfGroupResult = this._mapper.Map<GfGroupDto>(gfGroup);
+                    return this.Ok(gfGroupResult);
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside GetGF_GroupById action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                this._logger.LogError($"Something went wrong inside GetGF_GroupById action: {ex.Message}");
+                return this.StatusCode(500, "Internal server error");
             }
         }
 
@@ -73,25 +77,25 @@ namespace ORM_Fun.Controllers
         {
             try
             {
-                var gfGroup = _repository.GfGroup.GetGfGroupWithDimensions(id);
-                
+                var gfGroup = this._repository.GfGroup.GetGfGroupWithDimensions(id);
+
                 if (gfGroup == null)
                 {
-                    _logger.LogError($"GF Group with id: {id}, hasn't been found in db.");
-                    return NotFound();
+                    this._logger.LogError($"GF Group with id: {id}, hasn't been found in db.");
+                    return this.NotFound();
                 }
                 else
                 {
-                    _logger.LogInfo($"Returned GF Group with id: {id}");
+                    this._logger.LogInfo($"Returned GF Group with id: {id}");
 
-                    var gfGroupResult = _mapper.Map<GfGroupDto>(gfGroup);
-                    return Ok(gfGroupResult);
+                    var gfGroupResult = this._mapper.Map<GfGroupDto>(gfGroup);
+                    return this.Ok(gfGroupResult);
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside GetGfGroupWithDimensions action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                this._logger.LogError($"Something went wrong inside GetGfGroupWithDimensions action: {ex.Message}");
+                return this.StatusCode(500, "Internal server error");
             }
         }
 
@@ -102,31 +106,30 @@ namespace ORM_Fun.Controllers
             {
                 if (gfGroup == null)
                 {
-                    _logger.LogError("Owner object sent from client is null.");
-                    return BadRequest("Owner object is null");
+                    this._logger.LogError("Owner object sent from client is null.");
+                    return this.BadRequest("Owner object is null");
                 }
 
-                if (!ModelState.IsValid)
+                if (!this.ModelState.IsValid)
                 {
-                    _logger.LogError("Invalid owner object sent from client.");
-                    return BadRequest("Invalid model object");
+                    this._logger.LogError("Invalid owner object sent from client.");
+                    return this.BadRequest("Invalid model object");
                 }
 
-                var gfGroupEntity = _mapper.Map<GfGroup>(gfGroup);
+                var gfGroupEntity = this._mapper.Map<GfGroup>(gfGroup);
 
-                _repository.GfGroup.CreateGfGroup(gfGroupEntity);
-                _repository.Save();
+                this._repository.GfGroup.CreateGfGroup(gfGroupEntity);
+                this._repository.Save();
 
-                var createdGfGroup = _mapper.Map<GfGroupDto>(gfGroupEntity);
+                var createdGfGroup = this._mapper.Map<GfGroupDto>(gfGroupEntity);
 
-                return CreatedAtRoute("GfGroupById", new { id = createdGfGroup.Id }, createdGfGroup);
+                return this.CreatedAtRoute("GfGroupById", new { id = createdGfGroup.Id }, createdGfGroup);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside CreateGfGroup action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                this._logger.LogError($"Something went wrong inside CreateGfGroup action: {ex.Message}");
+                return this.StatusCode(500, "Internal server error");
             }
         }
-
     }
 }

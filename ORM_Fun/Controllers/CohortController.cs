@@ -1,12 +1,16 @@
-﻿using Contracts;
-using Entities.DataTransferObjects;
-using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
+﻿// <copyright file="CohortController.cs" company="Allata, LLC">
+// Copyright (c) Allata, LLC. All rights reserved.
+// </copyright>
 
 namespace ORM_Fun.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using AutoMapper;
+    using Contracts;
+    using Entities.DataTransferObjects;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("cohort")]
     [ApiController]
     public class CohortController : ControllerBase
@@ -17,9 +21,9 @@ namespace ORM_Fun.Controllers
 
         public CohortController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
         {
-            _logger = logger;
-            _repository = repository;
-            _mapper = mapper;
+            this._logger = logger;
+            this._repository = repository;
+            this._mapper = mapper;
         }
 
         [HttpGet]
@@ -27,17 +31,17 @@ namespace ORM_Fun.Controllers
         {
             try
             {
-                var cohorts = _repository.Cohort.GetAllCohorts();
-                _logger.LogInfo($"Returned all cohorts from database.");
+                var cohorts = this._repository.Cohort.GetAllCohorts();
+                this._logger.LogInfo($"Returned all cohorts from database.");
 
-                var cohortResult = _mapper.Map<IEnumerable<CohortDto>>(cohorts);
+                var cohortResult = this._mapper.Map<IEnumerable<CohortDto>>(cohorts);
 
-                return Ok(cohortResult);
+                return this.Ok(cohortResult);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside GetAllCohorts action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                this._logger.LogError($"Something went wrong inside GetAllCohorts action: {ex.Message}");
+                return this.StatusCode(500, "Internal server error");
             }
         }
 
@@ -46,26 +50,25 @@ namespace ORM_Fun.Controllers
         {
             try
             {
-                var cohort = _repository.Cohort.GetCohortById(id);
+                var cohort = this._repository.Cohort.GetCohortById(id);
                 if (cohort == null)
                 {
-                    _logger.LogError($"Cohrt with id: {id}, hasn't been found in db.");
-                    return NotFound();
+                    this._logger.LogError($"Cohrt with id: {id}, hasn't been found in db.");
+                    return this.NotFound();
                 }
                 else
                 {
-                    _logger.LogInfo($"Returned cohort with id: {id}");
+                    this._logger.LogInfo($"Returned cohort with id: {id}");
 
-                    var cohortResult = _mapper.Map<CohortDto>(cohort);
-                    return Ok(cohortResult);
+                    var cohortResult = this._mapper.Map<CohortDto>(cohort);
+                    return this.Ok(cohortResult);
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside GetOwnerById action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                this._logger.LogError($"Something went wrong inside GetOwnerById action: {ex.Message}");
+                return this.StatusCode(500, "Internal server error");
             }
         }
-
     }
 }

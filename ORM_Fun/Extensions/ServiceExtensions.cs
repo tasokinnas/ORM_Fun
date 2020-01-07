@@ -1,23 +1,27 @@
-﻿using LoggerService;
-using Contracts;
-using Entities;
-using Repository;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
+﻿// <copyright file="ServiceExtensions.cs" company="Allata, LLC">
+// Copyright (c) Allata, LLC. All rights reserved.
+// </copyright>
 
 namespace ORM_Fun.Extensions
 {
+    using Contracts;
+    using Entities;
+    using LoggerService;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.SqlServer;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Repository;
+
     public static class ServiceExtensions
     {
-
         public static void ConfigureCors(this IServiceCollection services)
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy",
+                options.AddPolicy(
+                    "CorsPolicy",
                     builder => builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
@@ -28,7 +32,6 @@ namespace ORM_Fun.Extensions
         {
             services.Configure<IISOptions>(options =>
             {
-
             });
         }
 
@@ -47,6 +50,5 @@ namespace ORM_Fun.Extensions
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
-
     }
 }

@@ -1,30 +1,33 @@
-﻿using AutoMapper;
-using Entities.DataTransferObjects;
-using Entities.Models;
+﻿// <copyright file="MappingProfile.cs" company="Allata, LLC">
+// Copyright (c) Allata, LLC. All rights reserved.
+// </copyright>
 
 namespace ORM_Fun
 {
+    using AutoMapper;
+    using Entities.DataTransferObjects;
+    using Entities.Models;
+
     public class MappingProfile : Profile
     {
         public MappingProfile()
         {
             // Cohort
-            CreateMap<Cohort, CohortDto>();
+            this.CreateMap<Cohort, CohortDto>();
 
             //Group
-            CreateMap<GfGroup, GfGroupDto>();
-            CreateMap<GfGroupCreateDto, GfGroup>();
-            CreateMap<GfGroupUpdateDto, GfGroup>();
-
+            this.CreateMap<GfGroup, GfGroupDto>();
+            this.CreateMap<GfGroupCreateDto, GfGroup>();
+            this.CreateMap<GfGroupUpdateDto, GfGroup>();
 
             // Dimension
-            CreateMap<Dimension, DimensionDto>();
+            this.CreateMap<Dimension, DimensionDto>();
 
             //Facet
-            CreateMap<Facet, FacetDto>();
+            this.CreateMap<Facet, FacetDto>();
 
             //Expectation
-            CreateMap<Expectation, ExpectationDto>();
+            this.CreateMap<Expectation, ExpectationDto>();
         }
     }
 }

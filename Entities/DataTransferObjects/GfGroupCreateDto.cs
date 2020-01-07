@@ -1,7 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿// <copyright file="GfGroupCreateDto.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Entities.DataTransferObjects
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class GfGroupCreateDto
     {
         [Required(ErrorMessage = "Name is required")]

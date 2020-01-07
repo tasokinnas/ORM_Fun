@@ -1,8 +1,12 @@
-﻿using Contracts;
-using NLog;
+﻿// <copyright file="LoggerManager.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace LoggerService
 {
+    using Contracts;
+    using NLog;
+
     public class LoggerManager : ILoggerManager
     {
         private static ILogger logger = LogManager.GetCurrentClassLogger();
