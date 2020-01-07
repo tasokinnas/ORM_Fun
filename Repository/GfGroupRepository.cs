@@ -38,5 +38,11 @@ namespace Repository
             Create(gfGroup);
         }
 
+        public void UpdateGfGroup(GfGroup gfGroup) 
+        {
+            Update(gfGroup);
+        }
+
+
     }
 }

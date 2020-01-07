@@ -19,11 +19,11 @@ namespace Repository
             return FindAll().OrderBy(e => e.Description).ToList();
         }
 
-        public Expectation GetExpectationById(Guid CohortId, Guid FacetId)
+        public Expectation GetExpectationById(Guid cohortId, Guid facetId)
         {
             return FindByCondition(expectation => 
-            expectation.CohortId.Equals(CohortId) &&
-            expectation.FacetId.Equals(FacetId)
+            expectation.CohortId.Equals(cohortId) &&
+            expectation.FacetId.Equals(facetId)
             ).FirstOrDefault();
         }    
     }

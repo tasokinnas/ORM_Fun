@@ -14,6 +14,7 @@ namespace ORM_Fun
             //Group
             CreateMap<GfGroup, GfGroupDto>();
             CreateMap<GfGroupCreateDto, GfGroup>();
+            CreateMap<GfGroupUpdateDto, GfGroup>();
 
 
             // Dimension

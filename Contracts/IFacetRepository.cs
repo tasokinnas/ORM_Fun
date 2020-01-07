@@ -7,6 +7,6 @@ namespace Contracts
     public interface IFacetRepository : IRepositoryBase<Facet>
     {
         IEnumerable<Facet> GetAllFacets();
-        Facet GetFacetById(Guid Id);
+        Facet GetFacetById(Guid id);
     }
 }

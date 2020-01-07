@@ -19,9 +19,9 @@ namespace Repository
             return FindAll().OrderBy(f => f.Name).ToList();
         }
 
-        public Facet GetFacetById(Guid Id)
+        public Facet GetFacetById(Guid id)
         {
-            return FindByCondition(facet => facet.Id.Equals(Id)).FirstOrDefault();
+            return FindByCondition(facet => facet.Id.Equals(id)).FirstOrDefault();
         }
     }
 }

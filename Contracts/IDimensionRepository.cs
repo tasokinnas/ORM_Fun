@@ -7,6 +7,6 @@ namespace Contracts
     public interface IDimensionRepository : IRepositoryBase<Dimension>
     {
         IEnumerable<Dimension> GetAllDimensions();
-        Dimension GetDimensionById(Guid Id);
+        Dimension GetDimensionById(Guid id);
     }
 }

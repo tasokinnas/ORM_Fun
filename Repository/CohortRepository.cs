@@ -19,9 +19,9 @@ namespace Repository
             return FindAll().OrderBy(c => c.Name).ToList(); 
         }
 
-        public Cohort GetCohortById(Guid Id)
+        public Cohort GetCohortById(Guid id)
         {
-            return FindByCondition(cohort => cohort.Id.Equals(Id)).FirstOrDefault();
+            return FindByCondition(cohort => cohort.Id.Equals(id)).FirstOrDefault();
         }
     }
 }

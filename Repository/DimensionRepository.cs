@@ -19,9 +19,9 @@ namespace Repository
             return FindAll().OrderBy(d => d.Name).ToList();
         }
 
-        public Dimension GetDimensionById(Guid Id)
+        public Dimension GetDimensionById(Guid id)
         {
-            return FindByCondition(dimension => dimension.Id.Equals(Id)).FirstOrDefault();
+            return FindByCondition(dimension => dimension.Id.Equals(id)).FirstOrDefault();
         }
     }
 }
