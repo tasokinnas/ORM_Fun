@@ -12,6 +12,9 @@ namespace ORM_Fun.Controllers
     using Entities.Models;
     using Microsoft.AspNetCore.Mvc;
 
+    /// <summary>
+    /// group controller.
+    /// </summary>
     [Route("gfgroup")]
     [ApiController]
     public class GfGroupController : ControllerBase
@@ -20,6 +23,12 @@ namespace ORM_Fun.Controllers
         private IRepositoryWrapper repository;
         private IMapper mapper;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GfGroupController"/> class.
+        /// </summary>
+        /// <param name="logger">the logger object.</param>
+        /// <param name="repository">the repository object.</param>
+        /// <param name="mapper">the mapper object.</param>
         public GfGroupController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
         {
             this.logger = logger;
@@ -27,6 +36,10 @@ namespace ORM_Fun.Controllers
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// get all groups api call.
+        /// </summary>
+        /// <returns>list of groups.</returns>
         [HttpGet]
         public IActionResult GetAllGfGroups()
         {
@@ -46,6 +59,11 @@ namespace ORM_Fun.Controllers
             }
         }
 
+        /// <summary>
+        /// get group by id api call.
+        /// </summary>
+        /// <param name="id">group id.</param>
+        /// <returns>returns a group object by id.</returns>
         [HttpGet("{id}", Name = "GfGroupById")]
         public IActionResult GetGfGroupById(Guid id)
         {
@@ -72,6 +90,11 @@ namespace ORM_Fun.Controllers
             }
         }
 
+        /// <summary>
+        /// get dimensions for a group.
+        /// </summary>
+        /// <param name="id">group id.</param>
+        /// <returns>list of dimensions for a group based on group id.</returns>
         [HttpGet("{id}/dimension")]
         public IActionResult GetGfGroupWithDimensions(Guid id)
         {
@@ -99,6 +122,11 @@ namespace ORM_Fun.Controllers
             }
         }
 
+        /// <summary>
+        /// create a new group object api.
+        /// </summary>
+        /// <param name="gfGroup">group object.</param>
+        /// <returns>newly created group object.</returns>
         [HttpPost]
         public IActionResult CreateGfGroup([FromBody]GfGroupCreateDto gfGroup)
         {
@@ -128,6 +156,50 @@ namespace ORM_Fun.Controllers
             catch (Exception ex)
             {
                 this.logger.LogError($"Something went wrong inside CreateGfGroup action: {ex.Message}");
+                return this.StatusCode(500, "Internal server error");
+            }
+        }
+
+        /// <summary>
+        /// update group object api.
+        /// </summary>
+        /// <param name="id">group id.</param>
+        /// <param name="gfGroup">group object.</param>
+        /// <returns>updated group object.</returns>
+        [HttpPut("{id}")]
+        public IActionResult UpdateGfGroup(Guid id, [FromBody]GfGroupUpdateDto gfGroup)
+        {
+            try
+            {
+                if (gfGroup == null)
+                {
+                    this.logger.LogError("GfGroup object sent from client is null.");
+                    return this.BadRequest("GfGroup object is null");
+                }
+
+                if (!this.ModelState.IsValid)
+                {
+                    this.logger.LogError("Invalid gfGroup object sent from client.");
+                    return this.BadRequest("Invalid model object");
+                }
+
+                var gfGroupEntity = this.repository.GfGroup.GetGfGroupById(id);
+                if (gfGroupEntity == null)
+                {
+                    this.logger.LogError($"GfGroup with id: {id}, hasn't been found in db.");
+                    return this.NotFound();
+                }
+
+                this.mapper.Map(gfGroup, gfGroupEntity);
+
+                this.repository.GfGroup.UpdateGfGroup(gfGroupEntity);
+                this.repository.Save();
+
+                return this.NoContent();
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError($"Something went wrong inside UpdateGfGroup action: {ex.Message}");
                 return this.StatusCode(500, "Internal server error");
             }
         }
