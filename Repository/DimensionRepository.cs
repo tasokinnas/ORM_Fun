@@ -27,5 +27,10 @@ namespace Repository
         {
             return this.FindByCondition(dimension => dimension.Id.Equals(id)).FirstOrDefault();
         }
+
+        public IEnumerable<Dimension> DimensionsByGfGroup(Guid gfGroupID)
+        {
+            return this.FindByCondition(d => d.GfGroupId.Equals(gfGroupID)).ToList();
+        }
     }
 }

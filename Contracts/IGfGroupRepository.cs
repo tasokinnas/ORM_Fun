@@ -44,5 +44,11 @@ namespace Contracts
         /// </summary>
         /// <param name="gfGroup">group object.</param>
         void UpdateGfGroup(GfGroup gfGroup);
+
+        /// <summary>
+        /// delete a group object.
+        /// </summary>
+        /// <param name="gfGroup">group object.</param>
+        void DeleteGfGroup(GfGroup gfGroup);
     }
 }

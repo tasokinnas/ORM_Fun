@@ -76,5 +76,10 @@ namespace Repository
         {
             this.Update(gfGroup);
         }
+
+        public void DeleteGfGroup(GfGroup gfGroup)
+        {
+            Delete(gfGroup);
+        }
     }
 }

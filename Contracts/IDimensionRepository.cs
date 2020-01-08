@@ -13,5 +13,7 @@ namespace Contracts
         IEnumerable<Dimension> GetAllDimensions();
 
         Dimension GetDimensionById(Guid id);
+
+        IEnumerable<Dimension> DimensionsByGfGroup(Guid gfGroupId);
     }
 }

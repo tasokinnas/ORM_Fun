@@ -6,6 +6,7 @@ namespace ORM_Fun.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using AutoMapper;
     using Contracts;
     using Entities.DataTransferObjects;
@@ -165,7 +166,7 @@ namespace ORM_Fun.Controllers
         /// </summary>
         /// <param name="id">group id.</param>
         /// <param name="gfGroup">group object.</param>
-        /// <returns>updated group object.</returns>
+        /// <returns>no content.</returns>
         [HttpPut("{id}")]
         public IActionResult UpdateGfGroup(Guid id, [FromBody]GfGroupUpdateDto gfGroup)
         {
@@ -201,6 +202,41 @@ namespace ORM_Fun.Controllers
             {
                 this.logger.LogError($"Something went wrong inside UpdateGfGroup action: {ex.Message}");
                 return this.StatusCode(500, "Internal server error");
+            }
+        }
+
+        /// <summary>
+        /// delete group object api.
+        /// </summary>
+        /// <param name="id">group id.</param>
+        /// <returns>no content.</returns>
+        [HttpDelete("{id}")]
+        public IActionResult DeleteGfGroup(Guid id)
+        {
+            try
+            {
+                var gfGroup = this.repository.GfGroup.GetGfGroupById(id);
+                if (gfGroup == null)
+                {
+                    this.logger.LogError($"GfGroup with id: {id}, hasn't been found in db.");
+                    return this.NotFound();
+                }
+
+                if (this.repository.Dimension.DimensionsByGfGroup(id).Any())
+                {
+                    this.logger.LogError($"Cannot delete gfgroup with id: {id}. It has related dimensions. Delete those dimensions first");
+                    return this.BadRequest("Cannot delete gfgroup. It has related dimensions. Delete those dimensions first");
+                }
+
+                this.repository.GfGroup.DeleteGfGroup(gfGroup);
+                this.repository.Save();
+
+                return this.NoContent();
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError($"Something went wrong inside DeleteOwner action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
             }
         }
     }
