@@ -1,4 +1,5 @@
 -- Clear in reverse order due to foreign key constraints
+IF OBJECT_ID('dbo.CohortFacetExpectation', 'U') IS NOT NULL DROP TABLE dbo.CohortFacetExpectation;
 IF OBJECT_ID('dbo.Expectation', 'U') IS NOT NULL DROP TABLE dbo.Expectation;
 IF OBJECT_ID('dbo.Facet', 'U') IS NOT NULL DROP TABLE dbo.Facet; 
 IF OBJECT_ID('dbo.Dimension', 'U') IS NOT NULL DROP TABLE dbo.Dimension; 
@@ -37,33 +38,16 @@ CREATE TABLE dbo.Facet  (
 
 -- Create Expectation Table
 CREATE TABLE dbo.Expectation  (
+	[Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
+	[Description] VARCHAR(500) NOT NULL
+);
+
+CREATE TABLE dbo.CohortFacetExpectation  (
+	[Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID() NOT NULL,
+	[CohortId] UNIQUEIDENTIFIER NOT NULL,
 	[FacetId] UNIQUEIDENTIFIER NOT NULL,
-	[CohortId] UNIQUEIDENTIFIER NOT NULL, 
-	[Description] VARCHAR(500) NOT NULL,
-	CONSTRAINT fk_Expectation_Facet FOREIGN KEY ([FacetId]) REFERENCES Facet ([Id]),
-	CONSTRAINT fk_Expectation_Cohort FOREIGN KEY ([CohortId]) REFERENCES Cohort ([Id])
-);
-
-
-
-
-
-
--- For CodeMaze Tutorial...
-IF OBJECT_ID('dbo.Account', 'U') IS NOT NULL DROP TABLE dbo.Account; 
-IF OBJECT_ID('dbo.Owner', 'U') IS NOT NULL DROP TABLE dbo.Owner; 
-
-CREATE TABLE dbo.Owner  (
-	OwnerID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),  
-	Name VARCHAR(60) NOT NULL,
-	DateOfBirth DATE NOT NULL,
-	Address VARCHAR(100)
-);
-
-CREATE TABLE dbo.Account  (
-	AccountID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),  
-	DateCreated DATE NOT NULL,
-	AccountType VARCHAR(45),
-	OwnerID UNIQUEIDENTIFIER NOT NULL, 
-	CONSTRAINT fk_Account_Owner FOREIGN KEY (OwnerID) references Owner (OwnerID)
+	[ExpectationId] UNIQUEIDENTIFIER NOT NULL,
+	CONSTRAINT fk_CohortFacetExpectation_Cohort FOREIGN KEY ([CohortId]) REFERENCES Cohort ([Id]),
+	CONSTRAINT fk_CohortFacetExpectation_Facet FOREIGN KEY ([FacetId]) REFERENCES Facet ([Id]),
+	CONSTRAINT fk_CohortFacetExpectation_Expectation FOREIGN KEY ([ExpectationId]) REFERENCES Expectation ([Id])
 );
