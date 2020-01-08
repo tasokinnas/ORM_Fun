@@ -12,6 +12,6 @@ namespace Contracts
     {
         IEnumerable<Expectation> GetAllExpectations();
 
-        Expectation GetExpectationById(Guid cohortId, Guid facetId);
+        Expectation GetExpectationById(Guid id);
     }
 }

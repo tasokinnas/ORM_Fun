@@ -5,13 +5,14 @@
 namespace Entities.DataTransferObjects
 {
     using System;
+    using System.Collections.Generic;
 
     public class ExpectationDto
     {
+        public Guid Id { get; set; }
+
         public string Description { get; set; }
 
-        public Guid CohortId { get; set; }
-
-        public Guid FacetId { get; set; }
+        public IEnumerable<CohortFacetExpectationDto> CohortFacetExpectations { get; set; }
     }
 }

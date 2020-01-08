@@ -25,6 +25,6 @@ namespace Entities.Models
 
         public Dimension Dimension { get; set; }
 
-        public ICollection<Expectation> Expectations { get; set; }
+        public ICollection<CohortFacetExpectation> CohortFacetExpectations { get; set; }
     }
 }

@@ -15,6 +15,6 @@ namespace Entities.DataTransferObjects
 
         public Guid DimensionId { get; set; }
 
-        public IEnumerable<ExpectationDto> Expectations { get; set; }
+        public IEnumerable<CohortFacetExpectationDto> CohortFacetExpectations { get; set; }
     }
 }

@@ -16,6 +16,8 @@ namespace Contracts
 
         IExpectationRepository Expectation { get; }
 
+        ICohortFacetExpectationRepository CohortFacetExpectation { get; }
+
         void Save();
     }
 }

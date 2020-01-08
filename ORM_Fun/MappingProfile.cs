@@ -35,6 +35,9 @@ namespace ORM_Fun
 
             // expectation controller.
             this.CreateMap<Expectation, ExpectationDto>();
+
+            // cohortfacetexpectation controller.
+            this.CreateMap<CohortFacetExpectation, CohortFacetExpectationDto>();
         }
     }
 }

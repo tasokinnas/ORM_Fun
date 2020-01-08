@@ -23,11 +23,9 @@ namespace Repository
             return this.FindAll().OrderBy(e => e.Description).ToList();
         }
 
-        public Expectation GetExpectationById(Guid cohortId, Guid facetId)
+        public Expectation GetExpectationById(Guid id)
         {
-            return this.FindByCondition(expectation =>
-            expectation.CohortId.Equals(cohortId) &&
-            expectation.FacetId.Equals(facetId)).FirstOrDefault();
+            return this.FindByCondition(e => e.Id.Equals(id)).FirstOrDefault();
         }
     }
 }

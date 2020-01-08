@@ -24,12 +24,7 @@ namespace Entities
 
         public DbSet<Expectation> Expectations { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
+        public DbSet<CohortFacetExpectation> CohortFacetExpectations { get; set; }
 
-            builder.Entity<Expectation>()
-                .HasKey(e => new { e.CohortId, e.FacetId });
-        }
     }
 }

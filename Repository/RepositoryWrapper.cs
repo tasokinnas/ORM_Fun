@@ -15,6 +15,7 @@ namespace Repository
         private IDimensionRepository dimension;
         private IFacetRepository facet;
         private IExpectationRepository expectation;
+        private ICohortFacetExpectationRepository cohortFacetExpectation;
 
         public RepositoryWrapper(RepositoryContext repositoryContext)
         {
@@ -85,6 +86,21 @@ namespace Repository
                 return this.expectation;
             }
         }
+
+        public ICohortFacetExpectationRepository CohortFacetExpectation
+        {
+            get
+            {
+                if (this.cohortFacetExpectation == null)
+                {
+                    this.cohortFacetExpectation = new CohortFacetExpectationRepository(this.repoContext);
+                }
+
+                return this.cohortFacetExpectation;
+            }
+        }
+
+
 
         public void Save()
         {

@@ -45,20 +45,20 @@ namespace ORM_Fun.Controllers
             }
         }
 
-        [HttpGet("{cohort_id}/{facet_id}")]
-        public IActionResult GetExpectationById(Guid cohortId, Guid facetId)
+        [HttpGet("{id}")]
+        public IActionResult GetExpectationById(Guid id)
         {
             try
             {
-                var expectation = this.repository.Expectation.GetExpectationById(cohortId, facetId);
+                var expectation = this.repository.Expectation.GetExpectationById(id);
                 if (expectation == null)
                 {
-                    this.logger.LogError($"Expectation with id: {cohortId} and {facetId}, hasn't been found in db.");
+                    this.logger.LogError($"Expectation with id: {id}, hasn't been found in db.");
                     return this.NotFound();
                 }
                 else
                 {
-                    this.logger.LogInfo($"Returned expectation with ids: {cohortId}, {facetId}");
+                    this.logger.LogInfo($"Returned expectation with id: {id}");
 
                     var expectationResult = this.mapper.Map<ExpectationDto>(expectation);
                     return this.Ok(expectationResult);

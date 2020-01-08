@@ -23,6 +23,6 @@ namespace Entities.Models
         [ForeignKey(nameof(Cohort))]
         public Guid NextCohortId { get; set; }
 
-        public ICollection<Expectation> Expectations { get; set; }
+        public ICollection<CohortFacetExpectation> CohortFacetExpectations { get; set; }
     }
 }
