@@ -2,25 +2,25 @@
 // Copyright (c) Allata, LLC. All rights reserved.
 // </copyright>
 
-namespace ORM_Fun
+namespace DapperSample
 {
     using System.IO;
-    using AutoMapper;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.HttpOverrides;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using NLog;
-    using ORM_Fun.Extensions;
+
+    using DapperSample.Extensions;
 
     public class Startup
     {
         public Startup(IConfiguration configuration)
         {
-            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
-            this.Configuration = configuration;
+
+            Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -30,10 +30,10 @@ namespace ORM_Fun
         {
             services.ConfigureCors();
             services.ConfigureIISIntegration();
-            services.ConfigureLoggerService();
-            services.ConfigureDbContext(this.Configuration);
-            services.ConfigureRepositoryWrapper();
-            services.AddAutoMapper(typeof(Startup));
+
+
+
+
 
 
             services.AddControllers();

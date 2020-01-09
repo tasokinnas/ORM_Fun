@@ -20,6 +20,9 @@ namespace Entities.Models
         [StringLength(50, ErrorMessage = "Name can't be longer than 50 characters")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Rank Integer is required")]
+        public int Rank { get; set; }
+
         [ForeignKey(nameof(Cohort))]
         public Guid NextCohortId { get; set; }
 

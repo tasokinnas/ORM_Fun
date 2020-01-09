@@ -2,17 +2,17 @@
 // Copyright (c) Allata, LLC. All rights reserved.
 // </copyright>
 
-namespace ORM_Fun.Extensions
+namespace DapperSample.Extensions
 {
-    using Contracts;
-    using Entities;
-    using LoggerService;
+
+
+
     using Microsoft.AspNetCore.Builder;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.SqlServer;
+    using Dapper;
+
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Repository;
+
 
     public static class ServiceExtensions
     {
@@ -34,21 +34,6 @@ namespace ORM_Fun.Extensions
             {
             });
         }
-
-        public static void ConfigureDbContext(this IServiceCollection services, IConfiguration config)
-        {
-            var connectionString = config["dbconnection:connectionString"];
-            services.AddDbContext<RepositoryContext>(o => o.UseSqlServer(connectionString));
-        }
-
-        public static void ConfigureLoggerService(this IServiceCollection services)
-        {
-            services.AddSingleton<ILoggerManager, LoggerManager>();
-        }
-
-        public static void ConfigureRepositoryWrapper(this IServiceCollection services)
-        {
-            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
-        }
+    
     }
 }

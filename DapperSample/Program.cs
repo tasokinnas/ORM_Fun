@@ -2,7 +2,7 @@
 // Copyright (c) Allata, LLC. All rights reserved.
 // </copyright>
 
-namespace ORM_Fun
+namespace DapperSample
 {
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
